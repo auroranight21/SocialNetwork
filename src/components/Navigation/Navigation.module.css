@@ -1,0 +1,27 @@
+.navigation {
+    grid-area: n;
+    background-color: rgba(0, 0, 0, 0.63);
+    padding: 20px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none
+}
+.item:hover {
+    color: white;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 20px;
+    background: #eae8e8;
+}
+.navigation a:active{
+    color: rgba(19, 5, 5, 0.58);
+}
+.navigation a:hover{
+    color: rgba(0, 0, 0, 0.58);
+}
+
+.itemLogout {
+
+}
