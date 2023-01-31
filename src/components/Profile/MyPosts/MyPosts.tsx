@@ -2,6 +2,7 @@ import classes from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {PostDataType} from "../../../redux/state";
 import React from "react";
+import { KeyboardEvent} from 'react'
 
 
 type MyPostsProps = {
@@ -15,10 +16,17 @@ export const MyPosts = (props: MyPostsProps) => {
     let newPost = React.createRef<HTMLTextAreaElement>()
     const addPostHandler = () => {
         if (newPost.current) {
-            // let newText = newPost.current.value
             props.addPost(newPost.current.value)
+            newPost.current.value =''
         }
     }
+
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.key === 'Enter'){
+            addPostHandler()
+        }
+    }
+
 
     let postsElement =
         props.posts.map(el => <Post message={el.message} likesCount={el.likesCount} key={el.id}/>)
@@ -29,7 +37,7 @@ export const MyPosts = (props: MyPostsProps) => {
             <h2>MyPosts</h2>
             <div>
                 <div>
-                    <textarea ref={newPost} />
+                    <textarea ref={newPost} onKeyDown={onKeyDownHandler}/>
                 </div>
                 <div>
                     <button onClick={addPostHandler}>Add</button>
