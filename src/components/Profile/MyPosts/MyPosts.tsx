@@ -6,28 +6,22 @@ import React from "react";
 
 type MyPostsProps = {
     posts: PostDataType[]
-    addPost:(postMessage: string) => void
+    addPost: (postMessage: string) => void
 };
 
 
 export const MyPosts = (props: MyPostsProps) => {
 
-    let newPost = React.createRef();
-
+    let newPost = React.createRef<HTMLTextAreaElement>()
     const addPostHandler = () => {
-
-        // @ts-ignore
-        let newText = newPost.current.value
-        props.addPost(newText)
+        if (newPost.current) {
+            // let newText = newPost.current.value
+            props.addPost(newPost.current.value)
+        }
     }
-
-
-
 
     let postsElement =
         props.posts.map(el => <Post message={el.message} likesCount={el.likesCount} key={el.id}/>)
-
-
 
 
     return (
@@ -35,10 +29,10 @@ export const MyPosts = (props: MyPostsProps) => {
             <h2>MyPosts</h2>
             <div>
                 <div>
-                    <textarea ref={newPost}></textarea>
+                    <textarea ref={newPost} />
                 </div>
                 <div>
-                    <button onClick={addPostHandler}>{newPost}</button>
+                    <button onClick={addPostHandler}>Add</button>
                     <button>Remove</button>
                 </div>
 
